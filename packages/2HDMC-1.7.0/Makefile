@@ -13,7 +13,7 @@ VPATH=src
 
 # *x* Note to self: Added gsl/1.15/include here
 CFLAGS= -Wall $(DEBUG) $(OPT) -I/local/software/gsl/1.15/include -fpermissive
-CFLAGS_HBHS= $(CFLAGS) -DHiggsBounds
+CFLAGS_HBHS= $(CFLAGS) -DHiggsBounds -fpermissive
 
 OBJDIR=lib
 LIBDIR=$(OBJDIR)
@@ -75,10 +75,7 @@ $(addprefix $(LIBDIR_HBHS)/, $(LIB_HBHS)): $(addprefix $(OBJDIR_HBHS)/, $(OBJECT
 	ar rcs $@ $(addprefix $(OBJDIR_HBHS)/, $(OBJECTS_HBHS))
 
 %: %.cpp $(addprefix $(LIBDIR)/, $(LIB))
-	$(CC) $< -Isrc $(CFLAGS) $(LDFLAGS) $(addprefix $(LIBDIR)/, $(LIBS)) -o $@
-
-%: %.cpp $(addprefix $(LIBDIR_HBHS)/, $(LIB_HBHS))
-	$(CC) $< -Isrc $(CFLAGS_HBHS) $(LDFLAGS_HBHS) $(addprefix $(LIBDIR_HBHS)/, $(LIBS)) -o $@
+	$(CC) $< -Isrc $(CFLAGS) $(LDFLAGS) -o $@
 
 clean:
 	@ echo "Cleaning library"
