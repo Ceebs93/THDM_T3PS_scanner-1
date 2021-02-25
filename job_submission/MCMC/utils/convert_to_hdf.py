@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 
-import tables
+import pytables as tables
 import pandas as pd
-import dask.dataframe as dd
 import sys
 import time
 import os
